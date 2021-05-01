@@ -7,13 +7,12 @@ import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import json_parsing.JSON;
 import utils.DispatcherQuery;
-import utils.monitor_queries.AddNewSensorMonitorQuery;
-import utils.monitor_queries.GetAllSensorsMonitorQuery;
-import utils.monitor_queries.MonitorQuery;
-import utils.monitor_queries.SetMonitorNameQuery;
+import utils.GetSensorByIdResponse;
+import utils.monitor_queries.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Main {
     public static Behavior<Void> create() {
@@ -21,11 +20,11 @@ public class Main {
                 context -> {
 
                     String fileSource = "";
-                    
+
                     try{
                         JsonNode node = JSON.parse(fileSource);
 
-                        System.out.println(node.get("queryType").asText());
+                        //System.out.println(node.get("queryType").asText());
                     }catch (IOException e){
                         e.printStackTrace();
                     }
@@ -41,6 +40,7 @@ public class Main {
 
 
 
+                    // --- AD HOC SIMPLE TESTS --- //
                     monitor1.tell(new AddNewSensorMonitorQuery(
                             "Adam",
                             "Kowalski",
@@ -67,7 +67,57 @@ public class Main {
                     ));
                     monitor1.tell(new GetAllSensorsMonitorQuery(dispatcher));
 
-                   return Behaviors.receive(Void.class).build();
+                    Scanner scanner = new Scanner(System.in);
+
+                    Thread.sleep(2000);
+                    System.out.println("EDITION TESTING PART");
+
+                    System.out.print("sensor ID: ");
+                    String sensorID;
+                    String newName;
+                    String newSurname;
+                    String newStreet;
+                    String newPCAndCity;
+                    String newCountry;
+                    sensorID = scanner.next();
+
+                    System.out.print("sensor new owner name: ");
+                    newName = scanner.next();
+                    System.out.print("sensor new owner surname: ");
+                    newSurname = scanner.next();
+                    System.out.print("sensor new street: ");
+                    newStreet = scanner.next();
+                    System.out.print("sensor new postal code and city: ");
+                    newPCAndCity = scanner.next();
+                    System.out.print("sensor new country: ");
+                    newCountry = scanner.next();
+
+                    monitor2.tell(new EditSensorMonitorQuery(sensorID,
+                            newName,
+                            newSurname,
+                            newStreet,
+                            newPCAndCity,
+                            newCountry,
+                            dispatcher
+                    ));
+                    monitor1.tell(new GetAllSensorsMonitorQuery(dispatcher));
+
+                    Thread.sleep(2000);
+                    System.out.println("DELETING TESTING PART");
+
+                    System.out.print("sensor ID: ");
+                    sensorID = scanner.next();
+                    monitor2.tell(new DeleteSensorMonitorQuery(sensorID, dispatcher));
+                    Thread.sleep(2000);
+                    monitor1.tell(new GetAllSensorsMonitorQuery(dispatcher));
+
+                    Thread.sleep(2000);
+                    System.out.println("SINGLE SENSOR TESTING PART");
+                    System.out.print("sensor ID: ");
+                    sensorID = scanner.next();
+                    monitor2.tell(new GetSensorByIdMonitorQuery(sensorID, dispatcher));
+
+                    return Behaviors.receive(Void.class).build();
                 });
     }
 

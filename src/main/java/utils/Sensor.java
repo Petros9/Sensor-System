@@ -35,4 +35,12 @@ public class Sensor {
     public String getUuid() {
         return uuid;
     }
+
+    public Owner getOwner() {
+        return owner;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
 }

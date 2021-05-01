@@ -37,15 +37,27 @@ public class Monitor extends AbstractBehavior<MonitorQuery> {
 
     private Behavior<MonitorQuery> onGetAllSensorsResponse(GetAllSensorsResponse response){
         ArrayList<Sensor> sensors = response.sensors;
-        sensors.forEach(sensor ->
-            System.out.println(sensor.getUuid())
-        );
+        sensors.forEach(sensor -> {
+            System.out.println("###########");
+            System.out.println(sensor.getUuid());
+            System.out.println(sensor.getOwner().getName());
+            System.out.println(sensor.getOwner().getSurname());
+            System.out.println(sensor.getAddress().getStreet());
+            System.out.println(sensor.getAddress().getPostalCodeAndCity());
+            System.out.println(sensor.getAddress().getCountry());
+        });
         return this;
     }
 
     private Behavior<MonitorQuery> onGetSensorByIdResponse(GetSensorByIdResponse response){
         Sensor sensor = response.sensor;
+        System.out.println("###########");
         System.out.println(sensor.getUuid());
+        System.out.println(sensor.getOwner().getName());
+        System.out.println(sensor.getOwner().getSurname());
+        System.out.println(sensor.getAddress().getStreet());
+        System.out.println(sensor.getAddress().getPostalCodeAndCity());
+        System.out.println(sensor.getAddress().getCountry());
         return this;
     }
     private Behavior<MonitorQuery> onSetMonitorNameQuery(SetMonitorNameQuery query){

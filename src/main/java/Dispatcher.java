@@ -73,6 +73,4 @@ public class Dispatcher extends AbstractBehavior<DispatcherQuery> {
         }
         return this;
     }
-
-    // zrobić wywoływanie błędów
 }
