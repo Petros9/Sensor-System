@@ -92,24 +92,56 @@ Klasa ma zadanie enkapsulować informacje na temat właściciela czujnika.
 Właściciel posiada następujące parametry: imię i nazwisko. 
 
 ### Utils
+Zapytania zawarte w `monitor_queries` w strukturze są bardzo podobne do tych znajdujących się poziom wyżej. Jedyna różnica polega na dodaniu do nich referencji do aktora dispatchera, tak by możliwe było wysłanie do niego odpowiednich zapytań ze stacji monitorującej.
 
 ***AddNewSensorQuery*** 
-
+Zapytanie ma na celu zainicjalizowanie utworzenia nowego czujnika w systemie. Zawiera takie informacje jak: 
+- numer id czujnika,
+- imię właściciela,
+- nazwisko właściciela,
+- ulicę,
+- kod pocztowy i miasto,
+- kraj.
 
 ***DeleteSensorQuery*** 
-
+Zapytanie ma na celu zainicjalizowanie usunięcia czujnika z systemu. Zawiera takie informacje jak: 
+- numer id czujnika,
+- referencję do stacji, tak by było możliwe odesłanie informacji o potencjalnym błędzie.
 
 ***EditSensorQuery*** 
+Zapytanie ma na celu zainicjalizowanie edycji czujnika z systemu. Zawiera takie informacje jak: 
+- numer id czujnika,
+- potencjalnie nowe imię właściciela,
+- potencjalnie nowe nazwisko właściciela,
+- potencjalnie nową ulicę,
+- potencjalnie nowe kod pocztowy i miasto,
+- potencjalnie nowy kraj.
+- referencję do stacji, tak by było możliwe odesłanie informacji o potencjalnym błędzie.
 
 
 ***ErrorResponse*** 
+Odpowiedź ma na celu poinformowanie o zaistnieniu błędu. Zawiera takie informacje jak: 
+- treść błędu.
 
 ***GetAllSensorsQuery*** 
+Zapytanie ma na celu zlecenie wysłania wszystkich czujników z systemu. Zawiera takie informacje jak: 
+- referencję do stacji, tak by było możliwe odesłanie listy wszystkich czujników.
 
 ***GetAllSensorsResponse*** 
+Odpowiedź ma na celu wysłanie wszystkich czujników z systemu. Zawiera: 
+- listę czujników.
 
 ***GetSensorByIdQuery*** 
+Odpowiedź ma na celu wysłanie czujnika z systemu o określonym id. Zawiera: 
+- id sensora,
+- referencję do stacji, tak by było możliwe odesłanie czujnika.
 
 ***GetSensorByIdResponse*** 
+Odpowiedź ma na celu odesłaniu czujnika z określonym id. Zawiera: 
+- sensor.
 
 ***Sensor*** 
+Klasa ma za zadanie odzwierciedlać czujnik. Zawiera takie elementy jak:
+- id,
+- obiekt właściciela,
+- obiekt adresu.
