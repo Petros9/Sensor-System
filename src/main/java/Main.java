@@ -11,24 +11,12 @@ import utils.GetSensorByIdResponse;
 import utils.monitor_queries.*;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
     public static Behavior<Void> create() {
         return Behaviors.setup(
                 context -> {
-
-                    String fileSource = "";
-
-                    try{
-                        JsonNode node = JSON.parse(fileSource);
-
-                        //System.out.println(node.get("queryType").asText());
-                    }catch (IOException e){
-                        e.printStackTrace();
-                    }
-
                     ActorRef<DispatcherQuery> dispatcher =  context.spawn(Dispatcher.create(), "dispatcher");
                     ActorRef<MonitorQuery> monitor1 = context.spawn(Monitor.create(), "Monitor1");
                     ActorRef<MonitorQuery> monitor2 = context.spawn(Monitor.create(), "Monitor2");
