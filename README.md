@@ -93,7 +93,7 @@ Właściciel posiada następujące parametry: imię i nazwisko.
 
 ### Utils
 Zapytania zawarte w `monitor_queries` w strukturze są bardzo podobne do tych znajdujących się poziom wyżej. Jedyna różnica polega na dodaniu do nich referencji do aktora dispatchera, tak by możliwe było wysłanie do niego odpowiednich zapytań ze stacji monitorującej.
-
+Wywołanie metody typu `[nazwa_stacji_monitorującej].tell(new Odpowiednie zapytnie z monitor-queries(z odpowidnimi argumentami))` spowoduje wykonanie określonej operacji.
 ***AddNewSensorQuery*** 
 Zapytanie ma na celu zainicjalizowanie utworzenia nowego czujnika w systemie. Zawiera takie informacje jak: 
 - numer id czujnika,
