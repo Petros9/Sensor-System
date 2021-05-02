@@ -2,7 +2,7 @@
 Prosty system do zarządzania czujnikami
 
 System korzysta z modelu aktorów Akka (z uwagi, że ma symulować komunikację sieciową). Zdecydowałem się na taki model z uwagi na to, że Akka oferuje model asynchronicznej komunikacji, który może okazać się wartościowy w tym scenariuszu.
-
+![alt text](https://github.com/Petros9/Sensor-System/blob/master/diagram.png)
 ### Główna aplikacja 
 Część składa się z poszczególnych klas:
 
